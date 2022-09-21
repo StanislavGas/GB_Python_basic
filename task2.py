@@ -7,19 +7,25 @@
 
 
 class MyException(Exception):
-    @staticmethod
-    def division_func(a, b):
-        try:
-            res = round(a / b, 2)
-            print(f"{a} / {b} = {res} \n")
-        except ZeroDivisionError:
-            print (f"{a} / {b} -> На ноль делить нельзя!\n")
+    def __init__(self, result):
+        self.result = result
 
 
 while True:
-    print('Для выхода введите Q/q')
-    user_in_1 = input('Введите делимое число: ')
-    if user_in_1 == 'Q' or user_in_1 == 'q':
+    a = int(input("Введите делимое число: "))
+    b = int(input("Введите делитель число: "))
+
+    try:
+        if b == 0:
+            raise MyException("На ноль делить нельзя!")
+        else:
+            print(f"Результат деления = {a / b}")
+    except MyException as err:
+        print(err)
+    except ValueError:
+        print("Ошибка ввода! Введите число")
+    q = input("q/Q - выход / Enter - Продолжить: ")
+    if q == 'q' or q == 'Q':
         break
-    user_in_2 = input('Введите число делитель: ')
-    MyException.division_func(int(user_in_1), int(user_in_2))
+    else:
+        continue

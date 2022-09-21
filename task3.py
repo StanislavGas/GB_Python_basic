@@ -7,8 +7,7 @@
 Класс-исключение должен контролировать типы данных элементов списка.
 """
 
-
-class MyError(Exception):
+"""class MyError(Exception):
     @staticmethod
     def func_check(num):
         if not num.isdigit():
@@ -27,4 +26,26 @@ while True:
         my_list.append(user_in)
     else:
         continue
+print(f'Итоговый список {my_list}')"""
+
+
+class MyError(Exception):
+    def __init__(self, res):
+        self.res = res
+
+
+my_list = []
+while True:
+    try:
+        print('Для выхода введите Q/q')
+        user_in = input('Введите число: ')
+        if user_in == 'q' or user_in == 'Q':
+            break
+        elif not user_in.isdigit():
+            raise MyError('Ошибка!')
+        else:
+            my_list.append(user_in)
+    except MyError as err:
+        print(err)
+
 print(f'Итоговый список {my_list}')
